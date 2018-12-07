@@ -1,98 +1,94 @@
-// C code to implement Priority Queue 
-// using Linked List 
-#include <stdio.h> 
-#include <stdlib.h> 
+#include <stdio.h>
+#include <stdlib.h>
 
-// Node 
-typedef struct node { 
-	int data; 
+struct node {
+  int data; // only storing int for now
+  double priority; 
+  struct node *next;
+};
 
-	// Lower values indicate higher priority 
-	int priority; 
 
-	struct node* next; 
+struct node *newQueue(int data, double priority) {
+  struct node* first = (struct node*)malloc(sizeof(struct node*));
+  first->data = data;
+  first->priority = priority;
+  first->next = NULL;
 
-} Node; 
+  return first;
+}
 
-// Function to Create A New Node 
-Node* newNode(int d, int p) 
-{ 
-	Node* temp = (Node*)malloc(sizeof(Node)); 
-	temp->data = d; 
-	temp->priority = p; 
-	temp->next = NULL; 
+void insert(struct node *head, int data, double priority) {
+  struct node *new = newQueue(data, priority);
+  struct node *first = head;
 
-	return temp; 
-} 
+  // Boundary condition where node is first in the list
+  if(priority <= (head->priority)) { // FIFO?
+    new->next = head;
+    head = new;
+    //    printf("we got here 1 and p = %f \n", priority);    
+  } else {
+    while((head->next != NULL) && priority >((head->next)->priority)){
+      //      printf("we got here 2 and p = %f \n", priority);
+      head = head->next;
+    }
 
-// Return the value at head 
-int peek(Node** head) 
-{ 
-	return (*head)->data; 
-} 
+    new->next = head->next;
+    head->next = new;
+  }
+  
+}
 
-// Removes the element with the 
-// highest priority form the list 
-void pop(Node** head) 
-{ 
-	Node* temp = *head; 
-	(*head) = (*head)->next; 
-	free(temp); 
-} 
+void show(struct node *pq) {
+  struct node *it = pq;
+  while(it != NULL) {
+    printf("Node with data %d and priority %f\n", it->data, it->priority);
+    it = it->next;
+    
+  }
+  
+}
 
-// Function to push according to priority 
-void push(Node** head, int d, int p) 
-{ 
-	Node* start = (*head); 
+struct node* removePriorityMax(struct node *pq) {
+  struct node *ret = (struct node*)malloc(sizeof(ret));
+  ret->data = pq->data;
+  ret->priority = pq->priority;
+  ret->next = NULL;
+  printf(" did we get here? \n");
 
-	// Create new Node 
-	Node* temp = newNode(d, p); 
+  if(pq->next != NULL) {
+    printf("i stepped forward \n");
+    pq = pq->next; // Step forward
+    return ret;
+  }
 
-	// Special Case: The head of list has lesser 
-	// priority than new node. So insert new 
-	// node before head node and change head node. 
-	if ((*head)->priority > p) { 
+  printf("list is now empty \n");
+  return ret;
+}
 
-		// Insert New Node before head 
-		temp->next = *head; 
-		(*head) = temp; 
-	} 
-	else { 
 
-		// Traverse the list and find a 
-		// position to insert new node 
-		while (start->next != NULL && 
-			start->next->priority < p) { 
-			start = start->next; 
-		} 
+int main(int argc, char* argv[]) {
+  // create new node
+  printf("now making the queue\n");
+  struct node *pq = newQueue(5, 0.3);
 
-		// Either at the ends of the list 
-		// or at required position 
-		temp->next = start->next; 
-		start->next = temp; 
-	} 
-} 
+  printf("now inserting in the queue\n");  
+  insert(pq, 3, 0.34);
+  insert(pq, 7, 2.38);
+  insert(pq, 7, 2.33);
+  insert(pq, 7, 1.38);    
+  
+  show(pq);
 
-// Function to check is list is empty 
-int isEmpty(Node** head) 
-{ 
-	return (*head) == NULL; 
-} 
+  struct node *test;
+  printf("now for tested\n");  
+  test = removePriorityMax(pq);
 
-// Driver code 
-int main() 
-{ 
-	// Create a Priority Queue 
-	// 7->4->5->6 
-	Node* pq = newNode(4, 1); 
-	push(&pq, 5, 2); 
-	push(&pq, 6, 3); 
-	push(&pq, 7, 0); 
+  printf("now for removed\n");
+  show(test);
 
-	while (!isEmpty(&pq)) { 
-		printf("%d ", peek(&pq)); 
-		pop(&pq); 
-	} 
+  printf("how does pq look?\n");
+  show(pq);
 
-	return 0; 
-} 
+       
+  return 0;
+}
