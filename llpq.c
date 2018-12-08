@@ -48,6 +48,14 @@ void show(struct node **pq) {
   
 }
 
+int isEmpty(struct node **pq) {
+  if(*pq == NULL) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 void removePriorityMax(struct node **pq) {
   if(pq != NULL) {
     struct node *tmp = *pq;
@@ -56,7 +64,7 @@ void removePriorityMax(struct node **pq) {
       free(tmp); // Remove the elem
       return;
     } else {
-      free(pq);
+      *pq = NULL;
       printf("list is now empty \n");
     }
     return;
@@ -79,9 +87,9 @@ int main(int argc, char* argv[]) {
 
   printf("now inserting in the queue\n");  
   insert(&pq, 3, 0.34);
-  insert(&pq, 7, 2.38);
-  insert(&pq, 7, 2.33);
-  insert(&pq, 7, 1.38);    
+  insert(&pq, 3, 2.38);
+  insert(&pq, 2, 2.33);
+  insert(&pq, 1, 0.038);    
   
   show(&pq);
   int test;
@@ -89,19 +97,12 @@ int main(int argc, char* argv[]) {
   printf("now for how test looks\n");    
   printf("test data is %d\n", test);
   
-  printf("\n");    
-  printf("now for remove\n");  
-  removePriorityMax(&pq);
-  removePriorityMax(&pq);  
-
-  printf("how does pq look?\n");
-  show(&pq);
-
-  test = peek(&pq);
-  printf("now for how test looks\n");    
-  printf("test data is %d\n", test);
-
   
-       
+  // Show and then remove maxPriority
+  while(!isEmpty(&pq)){
+    printf("got num %d\n", peek(&pq));
+    removePriorityMax(&pq);  
+  }
+
   return 0;
 }
