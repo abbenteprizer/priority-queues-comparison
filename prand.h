@@ -1,0 +1,1 @@
+int prand(int, int);
