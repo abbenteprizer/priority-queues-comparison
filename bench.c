@@ -6,26 +6,39 @@
 #include <sys/resource.h>
 #include <time.h>
 
+#include "llpq.h" // Change all fnct names so we can also use heap?
+//#include "heappq.h" // include this later
+
+#define SAMPLES 20
+
 int main(int argc, char *argv[]) {
-  int minSize = atoi(argv[1]);
-  int maxSize = atoi(argv[2]);  
+  int numOperations = atoi(argv[1]);
+  int typeOfOperation = atoi(argv[2]);
 
   struct timespec t_start, t_stop; // Used for bench timings
   srand(time(NULL)); // Used for random
-
+  
   long wall_sec; 
   long wall_nsec;
   long wall_msec;
 
-
-  for(int k = sample; k <= numBlocks; k += sample) {
+  int sample = numOperations/SAMPLES; 
+  
+  
+  for(int k = sample; k <= numOperations; k += sample) {
     clock_gettime(CLOCK_MONOTONIC_COARSE, &t_start);
 
-    // Allocate random size between minSize and maxSize and do nr numBlocks
-    for(int i = 0; i < k; i++) {
-      balloc((int)(minSize + ((rand() % 10000) / 10000.0) *(maxSize - minSize)) % maxSize);
+      // change what we do here, switch case for different operations?
+    if(typeOfOperation == 1) {
+      struct node *pq = newQueue(5, 0.3); // Be before timer start?
+
+      for(int i = 0; i < k; i++) {
+	insert(&pq, i, i / 2); // third arg, should be t_stamp rand func
+      }
+    } else if(typeOfOperation == 2) {
+      
+
     }
-    
     clock_gettime(CLOCK_MONOTONIC_COARSE, &t_stop);
 
     wall_sec = t_stop.tv_sec - t_start.tv_sec;

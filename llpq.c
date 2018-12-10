@@ -79,7 +79,7 @@ int peek(struct node **head) {
   
 }
 
-
+/*
 int main(int argc, char* argv[]) {
   // create new node
   printf("now making the queue\n");
@@ -105,4 +105,4 @@ int main(int argc, char* argv[]) {
   }
 
   return 0;
-}
+}*/
