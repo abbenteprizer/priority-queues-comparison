@@ -12,6 +12,7 @@ void MakeEmpty(PriorityQueue H);
 void Insert(ElementType X, PriorityQueue H);
 
 void pq_push(pq_ptr q, DATTYPE data, double priority); // added this
+pq_ptr pq_new(int size); // added this
 
 ElementType DeleteMin(PriorityQueue H);
 ElementType FindMin(PriorityQueue H);
