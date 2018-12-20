@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < numOperations; i++) {
     timestamps[i] = (rand() % 1000000) / 1000000.;
   }
-  //
+
   // for(int i = 0; i < 10; i++) {
   //   printf("%f\n", timestamps[i]);
   // }
