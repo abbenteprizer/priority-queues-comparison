@@ -3,7 +3,7 @@
 
 struct node {
   int data; // only storing int for now
-  double priority; 
+  double priority;
   struct node *next;
 };
 
@@ -25,7 +25,7 @@ void insert(struct node **head, int data, double priority) {
   if(priority <= ((*head)->priority)) { // FIFO?
     new->next = (*head);
     (*head) = new;
-    //    printf("we got here 1 and p = %f \n", priority);    
+    //    printf("we got here 1 and p = %f \n", priority);
   } else {
     while(((*head)->next != NULL) && priority >(((*head)->next)->priority)){
       //      printf("we got here 2 and p = %f \n", priority);
@@ -35,7 +35,7 @@ void insert(struct node **head, int data, double priority) {
     new->next = (*head)->next;
     (*head)->next = new;
   }
-  
+
 }
 
 void show(struct node **pq) {
@@ -43,9 +43,9 @@ void show(struct node **pq) {
   while(it != NULL) {
     printf("Node with data %d and priority %f\n", it->data, it->priority);
     it = it->next;
-    
+
   }
-  
+
 }
 
 int isEmpty(struct node **pq) {
@@ -71,12 +71,12 @@ void removePriorityMax(struct node **pq) {
   } else {
     printf("list is already empty\n");
   }
-}  
+}
 
 int peek(struct node **head) {
-  
+
   return (*head)->data;
-  
+
 }
 
 /*
@@ -85,23 +85,23 @@ int main(int argc, char* argv[]) {
   printf("now making the queue\n");
   struct node *pq = newQueue(5, 0.3);
 
-  printf("now inserting in the queue\n");  
+  printf("now inserting in the queue\n");
   insert(&pq, 3, 0.34);
   insert(&pq, 3, 2.38);
   insert(&pq, 2, 2.33);
-  insert(&pq, 1, 0.038);    
-  
+  insert(&pq, 1, 0.038);
+
   show(&pq);
   int test;
   test = peek(&pq);
-  printf("now for how test looks\n");    
+  printf("now for how test looks\n");
   printf("test data is %d\n", test);
-  
-  
+
+
   // Show and then remove maxPriority
   while(!isEmpty(&pq)){
     printf("got num %d\n", peek(&pq));
-    removePriorityMax(&pq);  
+    removePriorityMax(&pq);
   }
 
   return 0;
