@@ -63,7 +63,8 @@ int main(int argc, char *argv[]) {
     wall_sec = t_stop.tv_sec - t_start.tv_sec;
     wall_nsec = t_stop.tv_nsec - t_start.tv_nsec;
     wall_msec = (wall_sec *1000) + (wall_nsec / 1000000);
-    printf("%d %ld\n", k, wall_msec);
+    // printf("%d %ld\n", k, wall_msec);
+    printf("%ld\n", wall_msec);
 
   }
 
