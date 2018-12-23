@@ -1,0 +1,23 @@
+#!/bin/bash
+
+./bench 5000000 1 215899614 >	data/llpq215899614.dat
+./bench 5000000 1 193948603	> data/llpq193948603.dat
+./bench 5000000 1 843574597	> data/llpq843574597.dat
+./bench 5000000 1 874432839	> data/llpq874432839.dat
+./bench 5000000 1 322625760 > data/llpq322625760.dat
+./bench 5000000 1 515409840	> data/llpq515409840.dat
+./bench 5000000 1 897288435	> data/llpq897288435.dat
+./bench 5000000 1 426677122	> data/llpq426677122.dat
+./bench 5000000 1 368758747	> data/llpq368758747.dat
+./bench 5000000 1 196253231 > data/llpq196253231.dat
+
+./benchheap 5000000 1 215899614 >	data/heappq215899614.dat
+./benchheap 5000000 1 193948603	> data/heappq193948603.dat
+./benchheap 5000000 1 843574597	> data/heappq843574597.dat
+./benchheap 5000000 1 874432839	> data/heappq874432839.dat
+./benchheap 5000000 1 322625760 > data/heappq322625760.dat
+./benchheap 5000000 1 515409840	> data/heappq515409840.dat
+./benchheap 5000000 1 897288435	> data/heappq897288435.dat
+./benchheap 5000000 1 426677122	> data/heappq426677122.dat
+./benchheap 5000000 1 368758747	> data/heappq368758747.dat
+./benchheap 5000000 1 196253231 > data/heappq196253231.dat
