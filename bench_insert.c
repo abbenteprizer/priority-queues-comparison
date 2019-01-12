@@ -42,22 +42,23 @@ int main(int argc, char *argv[]) {
 
       // change what we do here, switch case for different operations?
     if(typeOfOperation == 1) {
-      struct node *pq = newQueue(5, 0.3); // Be before timer start?
+      struct node *pq = newQueue(5, 0.3); // random priority insert
 
       for(int i = 0; i < k; i++) {
         // args are; pq, data, priority
 	       insert(&pq, i, timestamps[i]); // third arg, should be t_stamp rand func
       }
-    } else if(typeOfOperation == 2) {
+    } else if(typeOfOperation == 2) { // Always in order insert
       struct node *pq = newQueue(5, 0.3); // Be before timer start?
 
       for(int i = 0; i < k; i++) {
         // args are; pq, data, priority
 	       insert(&pq, i, i / 2.); // third arg, should be t_stamp rand func
       }
-
+    } else if(typeOfOperation == 3) { // Removing the elems
 
     }
+
     clock_gettime(CLOCK_MONOTONIC_COARSE, &t_stop);
 
     wall_sec = t_stop.tv_sec - t_start.tv_sec;

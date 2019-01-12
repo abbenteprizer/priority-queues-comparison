@@ -65,7 +65,7 @@ void removePriorityMax(struct node **pq) {
       return;
     } else {
       *pq = NULL;
-      printf("list is now empty \n");
+      // printf("list is now empty \n");
     }
     return;
   } else {
