@@ -161,7 +161,7 @@ DATTYPE pq_pop(pq_ptr q)
     if (q->n == 1)
         q->n = 0;
     else
-        pq_adjusttree(q);
+        // pq_adjusttree(q);
     return out;
 }
 
